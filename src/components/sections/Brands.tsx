@@ -3,49 +3,22 @@
 
 import { motion } from "framer-motion";
 import React from "react";
-import Image from "next/image";
 
-// Definisikan tipe untuk Brand
-interface BrandLogo {
-    id: string;
-    name: string;
-    logoUrl: string; // Path ke file logo (misal: "/images/brands/tokopedia.svg")
-}
-
-// Data Mockup: Baris Atas
-// Ganti "/images/brands/..." dengan path atau URL logo yang sebenarnya.
-const topRowBrands: BrandLogo[] = [
-    { id: "t1", name: "Tokopedia", logoUrl: "/images/brands/tokopedia.svg" },
-    { id: "t2", name: "Somethinc", logoUrl: "/images/brands/somethinc.png" },
-    { id: "t3", name: "Erigo", logoUrl: "/images/brands/erigo.svg" },
-    { id: "t4", name: "Samsung", logoUrl: "/images/brands/samsung.png" },
-    { id: "t5", name: "Wardah", logoUrl: "/images/brands/wardah.png" },
-    { id: "t6", name: "Scarlett", logoUrl: "/images/brands/scarlett.png" },
-    { id: "t7", name: "Gojek", logoUrl: "/images/brands/gojek.svg" },
-];
-
-// Data Mockup: Baris Bawah
-const bottomRowBrands: BrandLogo[] = [
-    { id: "b1", name: "Make Over", logoUrl: "/images/brands/makeover.png" },
-    { id: "b2", name: "Shopee", logoUrl: "/images/brands/shopee.svg" },
-    { id: "b3", name: "Indomie", logoUrl: "/images/brands/indomie.png" },
-    { id: "b4", name: "Maybelline", logoUrl: "/images/brands/maybelline.png" },
-    { id: "b5", name: "Unilever", logoUrl: "/images/brands/unilever.svg" },
-    { id: "b6", name: "Garnier", logoUrl: "/images/brands/garnier.png" },
-    { id: "b7", name: "BYD", logoUrl: "/images/brands/byd.png" },
-];
+// Mock data: Nama-nama brand (Nanti diganti dengan URL gambar logo asli)
+const topRowBrands = ["TOKOPEDIA", "SOMETHINC", "ERIGO", "SAMSUNG", "WARDAH", "SCARLETT", "GOJEK"];
+const bottomRowBrands = ["MAKE OVER", "SHOPEE", "INDOMIE", "MAYBELLINE", "UNILEVER", "GARNIER", "BYD"];
 
 export default function Brands() {
     return (
         <section className="py-20 md:py-32 bg-black overflow-hidden relative border-t border-white/5">
 
             {/* Header Section */}
-            <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-16 md:mb-24 text-center md:text-left relative z-20">
+            <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-12 md:mb-20 text-center md:text-left">
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    className="text-pink-500 text-xs md:text-sm font-bold tracking-[0.2em] mb-4 uppercase"
+                    className="text-pink-500 text-sm font-bold tracking-[0.2em] mb-4 uppercase"
                 >
                     Trusted By Visionaries
                 </motion.p>
@@ -60,34 +33,28 @@ export default function Brands() {
                 </motion.h2>
             </div>
 
-            {/* Gradient Mask: Membuat logo memudar di pinggir layar */}
-            <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+            {/* Efek Gradient di ujung kiri dan kanan agar logo memudar dengan halus */}
+            <div className="absolute left-0 w-24 md:w-64 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none mt-20" />
+            <div className="absolute right-0 w-24 md:w-64 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none mt-20" />
 
             {/* --- BARIS ATAS (Bergerak ke Kiri) --- */}
-            <div className="flex mb-12 md:mb-16">
+            <div className="flex mb-8 md:mb-12 group">
                 <motion.div
                     className="flex flex-nowrap w-max"
                     animate={{ x: ["0%", "-50%"] }}
-                    transition={{ repeat: Infinity, ease: "linear", duration: 45 }}
+                    transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
                 >
                     {[...Array(2)].map((_, blockIndex) => (
-                        <div key={`top-${blockIndex}`} className="flex gap-20 md:gap-32 items-center px-10 md:px-16">
-                            {topRowBrands.map((brand) => (
+                        <div key={`top-${blockIndex}`} className="flex gap-16 md:gap-32 items-center px-8 md:px-16">
+                            {topRowBrands.map((brand, index) => (
                                 <div
-                                    key={brand.id}
-                                    // Efek Hover: Logo membesar, filter grayscale hilang, muncul glow pink
-                                    className="relative w-32 md:w-48 h-12 md:h-16 flex items-center justify-center opacity-40 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-110 transition-all duration-500 cursor-pointer group"
+                                    key={index}
+                                    className="flex items-center justify-center h-16 md:h-24 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-110 transition-all duration-500 cursor-pointer"
                                 >
-                                    {/* Efek Glow di belakang logo saat di-hover */}
-                                    <div className="absolute inset-0 bg-pink-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                    <Image
-                                        src={brand.logoUrl}
-                                        alt={`${brand.name} logo`}
-                                        fill
-                                        className="object-contain drop-shadow-md relative z-10"
-                                    />
+                                    {/* Nanti ganti text ini dengan: <Image src={brand.logoUrl} alt={brand.name} fill className="object-contain" /> */}
+                                    <span className="text-2xl md:text-4xl font-black tracking-widest text-white whitespace-nowrap drop-shadow-[0_0_15px_rgba(236,72,153,0)] hover:drop-shadow-[0_0_15px_rgba(236,72,153,0.8)] hover:text-pink-500 transition-colors">
+                                        {brand}
+                                    </span>
                                 </div>
                             ))}
                         </div>
@@ -96,27 +63,23 @@ export default function Brands() {
             </div>
 
             {/* --- BARIS BAWAH (Bergerak ke Kanan) --- */}
-            <div className="flex">
+            <div className="flex group">
+                {/* Perhatikan animate x dimulai dari -50% ke 0% agar bergerak berlawanan arah */}
                 <motion.div
                     className="flex flex-nowrap w-max"
                     animate={{ x: ["-50%", "0%"] }}
-                    transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+                    transition={{ repeat: Infinity, ease: "linear", duration: 35 }} // Sedikit lebih cepat/lambat dari baris atas agar dinamis
                 >
                     {[...Array(2)].map((_, blockIndex) => (
-                        <div key={`bottom-${blockIndex}`} className="flex gap-20 md:gap-32 items-center px-10 md:px-16">
-                            {bottomRowBrands.map((brand) => (
+                        <div key={`bottom-${blockIndex}`} className="flex gap-16 md:gap-32 items-center px-8 md:px-16">
+                            {bottomRowBrands.map((brand, index) => (
                                 <div
-                                    key={brand.id}
-                                    className="relative w-32 md:w-48 h-12 md:h-16 flex items-center justify-center opacity-40 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-110 transition-all duration-500 cursor-pointer group"
+                                    key={index}
+                                    className="flex items-center justify-center h-16 md:h-24 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-110 transition-all duration-500 cursor-pointer"
                                 >
-                                    <div className="absolute inset-0 bg-pink-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                    <Image
-                                        src={brand.logoUrl}
-                                        alt={`${brand.name} logo`}
-                                        fill
-                                        className="object-contain drop-shadow-md relative z-10"
-                                    />
+                                    <span className="text-2xl md:text-4xl font-black tracking-widest text-white whitespace-nowrap drop-shadow-[0_0_15px_rgba(236,72,153,0)] hover:drop-shadow-[0_0_15px_rgba(236,72,153,0.8)] hover:text-white transition-colors">
+                                        {brand}
+                                    </span>
                                 </div>
                             ))}
                         </div>

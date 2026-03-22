@@ -12,9 +12,9 @@ export default function Home() {
     <main className="min-h-screen bg-black">
       <Hero />
       <Marquee />
+      <About />
       <Brands />
       <ExpandableServices />
-      <About />
       <Contact /> {/* Masuk ke sini */}
       <Footer />
     </main>
