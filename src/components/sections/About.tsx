@@ -78,7 +78,7 @@ export default function About() {
                 >
                     {/* Ganti src dengan foto portrait Piti yang paling bagus/editorial */}
                     <Image
-                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop"
+                        src="/img/Piti.jpeg"
                         alt="Piti Portrait"
                         fill
                         className="object-cover"
