@@ -1,0 +1,27 @@
+/* src/app/globals.css */
+@import "tailwindcss";
+
+/* Tailwind v4: define custom design tokens here instead of tailwind.config.ts */
+@theme {
+  --color-background: #0A0A0A;  /* Sleek Dark */
+  --color-foreground: #FAFAFA;  /* Off-white */
+  --color-accent: #FF007F;      /* Electric Neon Pink */
+  --color-surface: #171717;     /* Cards / elevated elements */
+
+  --font-family-sans: var(--font-inter), sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Custom Text Selection untuk kesan detail & premium */
+  ::selection {
+    @apply bg-accent text-white;
+  }
+}
