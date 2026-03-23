@@ -17,7 +17,7 @@ export default function About() {
     const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
     return (
-        <section ref={sectionRef} id="about" className="py-32 md:py-48 px-6 md:px-12 w-full bg-black text-white relative overflow-hidden">
+        <section ref={sectionRef} id="about" className="py-24 md:py-32 px-6 md:px-28 bg-black text-white relative overflow-hidden">
 
             {/* --- DECORATIVE TECHNICAL ACCENTS (DKV BRUTALIST STYLE) --- */}
             {/* Tanda Plus (+) di sudut-sudut untuk kesan 'Blueprint/Artboard' */}

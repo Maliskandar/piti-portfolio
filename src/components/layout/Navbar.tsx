@@ -4,10 +4,19 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const { scrollY } = useScroll();
+
+    // 2. AMBIL PATH URL SAAT INI
+    const pathname = usePathname();
+
+    // 3. LOGIKA UNTUK MENYEMBUNYIKAN NAVBAR DI STUDIO
+    if (pathname.startsWith("/studio")) {
+        return null;
+    }
 
     // Menggunakan hook framer-motion untuk mendeteksi scroll lebih smooth
     useMotionValueEvent(scrollY, "change", (latest) => {
@@ -29,8 +38,8 @@ export default function Navbar() {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 // Pointer-events-auto mengembalikan fungsi klik khusus untuk area navbar ini
                 className={`pointer-events-auto flex items-center justify-between overflow-hidden transition-all duration-500 ${scrolled
-                        ? "bg-black/70 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.8)] rounded-full px-6 py-3 w-[95%] md:w-max gap-8 md:gap-12"
-                        : "bg-transparent border-transparent w-full max-w-7xl px-2 py-2 rounded-none gap-4"
+                    ? "bg-black/70 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.8)] rounded-full px-6 py-3 w-[95%] md:w-max gap-8 md:gap-12"
+                    : "bg-transparent border-transparent w-full max-w-7xl px-2 py-2 rounded-none gap-4"
                     }`}
             >
                 {/* --- LOGO --- */}

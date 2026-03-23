@@ -6,36 +6,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, ArrowUpRight } from "lucide-react";
 
-// Mock data untuk 3 produk unggulan sebagai "Teaser" di website
-const picks = [
-    {
-        id: 1,
-        title: "Oversized Boxy Fit Tee",
-        category: "Daily Outfit",
-        image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop",
-        link: "https://msha.ke/sepalsepilpiti" // Arahkan ke link milkshake
-    },
-    {
-        id: 2,
-        title: "Studio RGB Tube Light",
-        category: "Content Gear",
-        image: "https://images.unsplash.com/photo-1550684376-efcbd6e3f031?q=80&w=800&auto=format&fit=crop",
-        link: "https://msha.ke/sepalsepilpiti"
-    },
-    {
-        id: 3,
-        title: "Chunky Platform Sneakers",
-        category: "Footwear",
-        image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=800&auto=format&fit=crop",
-        link: "https://msha.ke/sepalsepilpiti"
+// Tipe data sesuai dengan skema 'spill' di Sanity
+export interface SpillData {
+    _id: string;
+    title: string;
+    category: string;
+    imageUrl: string; // URL hasil resolve dari asset image
+    link: string;
+}
+
+// Komponen sekarang menerima props 'spills'
+export default function CuratedPicks({ spills }: { spills: SpillData[] }) {
+
+    // Fallback jika belum ada data di Sanity
+    if (!spills || spills.length === 0) {
+        return <div className="text-white text-center py-32">Loading curated picks...</div>;
     }
-];
 
-export default function CuratedPicks() {
     return (
-        <section id="picks" className="py-24 md:py-32 px-6 md:px-12 w-full bg-black relative overflow-hidden border-t border-white/5">
+        <section id="picks" className="py-24 md:py-32 px-6 md:px-28 bg-black relative overflow-hidden border-t border-white/5">
 
-            {/* Teks Latar Belakang Raksasa (Watermark style) */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none opacity-[0.03] overflow-hidden">
                 <h2 className="text-[20vw] font-black tracking-tighter uppercase whitespace-nowrap">
                     THE SPILL
@@ -74,37 +64,37 @@ export default function CuratedPicks() {
 
                 {/* --- GRID PRODUK TEASER --- */}
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {/* Render 3 Produk Teaser */}
-                    {picks.map((pick, index) => (
+
+                    {/* Looping data dari Sanity */}
+                    {spills.map((pick, index) => (
                         <motion.a
                             href={pick.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            key={pick.id}
+                            key={pick._id} // Gunakan _id dari Sanity
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                             className="group relative h-[400px] md:h-[450px] rounded-2xl overflow-hidden border border-white/10 bg-white/5 block"
                         >
-                            {/* Gambar Produk */}
-                            <Image
-                                src={pick.image}
-                                alt={pick.title}
-                                fill
-                                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-70 group-hover:opacity-100"
-                            />
+                            {/* Pastikan imageUrl ada */}
+                            {pick.imageUrl && (
+                                <Image
+                                    src={pick.imageUrl}
+                                    alt={pick.title}
+                                    fill
+                                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-70 group-hover:opacity-100"
+                                />
+                            )}
 
-                            {/* Gradient Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
 
-                            {/* Tombol Shopee di Kanan Atas (Tersembunyi, muncul saat hover) */}
                             <div className="absolute top-4 right-4 bg-orange-500 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.5)] flex items-center gap-1 z-20">
                                 View
                                 <ArrowUpRight className="w-3 h-3" />
                             </div>
 
-                            {/* Info Teks di Bawah */}
                             <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
                                 <p className="text-pink-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
                                     {pick.category}
@@ -116,7 +106,7 @@ export default function CuratedPicks() {
                         </motion.a>
                     ))}
 
-                    {/* --- KARTU CTA KE MILKSHAKE (Spill Semuanya) --- */}
+                    {/* --- KARTU CTA KE MILKSHAKE / SPILL ARCHIVE --- */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -138,10 +128,10 @@ export default function CuratedPicks() {
                                 Explore The <br /> Full Archive.
                             </h3>
                             <Link
-                                href="spill"
+                                href="/spill"
                                 className="inline-flex items-center justify-center w-full py-4 bg-white text-black text-sm font-bold tracking-widest uppercase rounded-full hover:scale-[1.02] transition-transform"
                             >
-                                Sepal Sepil Piti
+                                Explore The Archive
                             </Link>
                         </div>
                     </motion.div>
