@@ -124,7 +124,7 @@ export default function ExpandableServices({ works }: { works: WorkData[] }) {
                                     {service.title}
                                 </h3>
                                 <p className="text-pink-500 text-xs md:text-sm font-bold tracking-[0.2em] mb-4 uppercase">
-                                    FOR {service.brandName || "PERSONAL"}
+                                    {service.brandName || "PERSONAL"}
                                 </p>
 
                                 <p className="text-white/70 text-xs md:text-base mb-6 line-clamp-3 font-light leading-relaxed max-w-2xl">
