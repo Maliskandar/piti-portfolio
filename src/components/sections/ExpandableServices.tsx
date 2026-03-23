@@ -4,6 +4,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 interface Service {
@@ -89,20 +90,15 @@ export default function ExpandableServices() {
                     </motion.p>
                 </div>
 
-                {/* SEE MORE SERVICES BUTTON */}
-                <motion.button
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="group flex items-center gap-3 text-white hover:text-pink-500 transition-colors"
-                >
+                {/* SEE MORE SERVICES BUTTON - Bergaya premium */}
+                <Link href="/work" className="group flex items-center gap-3 text-white hover:text-pink-500 transition-colors">
                     <span className="text-sm font-medium tracking-widest uppercase">
                         See More Services
                     </span>
                     <div className="w-10 h-10 flex items-center justify-center rounded-full bg-pink-500 group-hover:scale-110 transition-transform">
                         <ArrowRight className="w-5 h-5 text-black" />
                     </div>
-                </motion.button>
+                </Link>
             </div>
 
             {/* --- EXPANDABLE ACCORDION CONTAINER --- */}

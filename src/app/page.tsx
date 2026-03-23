@@ -6,6 +6,7 @@ import ExpandableServices from "@/components/sections/ExpandableServices";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact"; // Section baru
 import Footer from "@/components/layout/Footer";
+import CuratedPicks from "@/components/sections/CuratedPicks";
 
 export default function Home() {
   return (
@@ -15,7 +16,8 @@ export default function Home() {
       <About />
       <Brands />
       <ExpandableServices />
-      <Contact /> {/* Masuk ke sini */}
+      <CuratedPicks />
+      <Contact />
       <Footer />
     </main>
   );

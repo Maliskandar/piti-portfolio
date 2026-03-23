@@ -40,9 +40,14 @@ export default function About() {
                         viewport={{ once: true, margin: "-100px" }}
                         className="flex flex-col gap-4"
                     >
-                        <span className="text-pink-500 text-xs font-bold tracking-[0.3em] uppercase border border-pink-500/30 px-4 py-1.5 rounded-full w-max bg-pink-500/5">
-                            [ IDENT : 01 ]
-                        </span>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            className="text-pink-500 text-sm font-bold tracking-[0.2em] mb-4 uppercase"
+                        >
+                            About Me
+                        </motion.p>
                         <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tighter leading-[0.9] uppercase">
                             I Don't Just <br />
                             Follow Trends.
